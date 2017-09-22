@@ -1,5 +1,6 @@
 package com.hinus.qa.controller;
 
+import com.hinus.qa.data.Question2AnswerData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,11 @@ public class QuestionAnsweringController {
     @RequestMapping("/service")
     @ResponseBody
     public String service(@RequestParam("question") String question) {
-        return "QUESTION_ANSWERING_" + question;
+        if (question != null) {
+            Question2AnswerData question2AnswerData = Question2AnswerData.getInstance();
+            return question2AnswerData.getAnswer(question);
+        } else {
+            return null;
+        }
     }
 }
